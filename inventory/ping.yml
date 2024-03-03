@@ -6,5 +6,5 @@
   become_flags: '-'
   task:
     - name: "Ping des utilisateurs" 
-      shell: ping host -c 10 
+      shell: ping application -c 10 
 
