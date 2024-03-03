@@ -1,0 +1,23 @@
+---
+- name: creation de FS 
+  hosts: all
+  become: yes
+  tasks:
+    - name: creer une partition
+      parted: 
+        device: /dev/sda1
+        state: present 
+        part_type: primary 
+        size: 10GB
+    - name: formater le env 
+      filesystem:
+        fstype: ext4
+        dev: /dev/sda1
+        force: yes
+    - name: monter le FS 
+      mount:
+        path: /applis
+        src: /dev/sda1
+        fstype: ext4
+        state: present
+        opts: defaults
