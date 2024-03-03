@@ -1,7 +1,5 @@
 ---
-all:
-  ansible_user: vagrant
-  ansible_password: vagrant 
+applis:
   hots:
       192.168.56.16:
       192.168.56.17:
