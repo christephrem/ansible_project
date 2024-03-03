@@ -6,12 +6,14 @@
     - name: creer une partition
       filesystem:
         fstype: ext4
-        dev: /dev/sda1
+        dev: /dev/sda2
+        resizefs: yes
+        size: 5GB
         force: yes
     - name: monter le FS 
       mount:
-        path: /applis
-        src: /dev/sda1
+        path: /applis/log
+        src: /dev/sda2
         fstype: ext4
         state: present
         opts: defaults
