@@ -1,10 +1,7 @@
 --- 
 - name:
   hosts: all
-  ansible_user: vagrant
-  ansible_password: vagrant
-  become: yes
-  become_methode: sudo
+
   tasks:
     - name: test du playbook
       shell: ping localhost -c 10 
