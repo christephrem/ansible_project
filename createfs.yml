@@ -6,12 +6,12 @@
     - name: creer une partition
       filesystem:
         fstype: ext4
-        dev: /dev/sda3
+        dev: /dev/mapper/ubuntu--vg-ubuntu--lv
         force: yes
     - name: monter le FS 
       mount:
         path: /applis
-        src: /dev/sda3
+        src: /dev/mapper/ubuntu--vg-ubuntu--lv
         fstype: ext4
         state: present
         opts: defaults
