@@ -1,6 +1,6 @@
 ---
 applis:
-  ansible_hosts: vagrant
+  ansible_hosts: root
   ansible_password: vagrant 
   hosts:
       192.168.56.12:
