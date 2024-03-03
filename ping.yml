@@ -1,7 +1,8 @@
 --- 
 - name:
   hosts: all
-
+  become: yes
+  become_method: "sudo"
   tasks:
     - name: test du playbook
       shell: ping localhost -c 10 
