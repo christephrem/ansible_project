@@ -4,11 +4,6 @@
   become: yes
   tasks:
     - name: creer une partition
-      dev: /dev/sda1
-      state: present 
-      part_type: primary 
-      
-    - name: formater le env 
       filesystem:
         fstype: ext4
         dev: /dev/sda1
