@@ -4,11 +4,10 @@
   become: yes
   tasks:
     - name: creer une partition
-      parted: 
-        device: /dev/sda1
-        state: present 
-        part_type: primary 
-        size: 10GB
+      dev: /dev/sda1
+      state: present 
+      part_type: primary 
+      
     - name: formater le env 
       filesystem:
         fstype: ext4
