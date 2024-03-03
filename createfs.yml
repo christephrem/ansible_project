@@ -7,12 +7,10 @@
       filesystem:
         fstype: ext4
         dev: /dev/sda2
-        resizefs: yes
-        size: 5GB
         force: yes
     - name: monter le FS 
       mount:
-        path: /applis/log
+        path: /applis
         src: /dev/sda2
         fstype: ext4
         state: present
