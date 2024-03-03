@@ -6,12 +6,12 @@
     - name: creer une partition
       filesystem:
         fstype: ext4
-        dev: /dev/sda2
+        dev: /dev/sda3
         force: yes
     - name: monter le FS 
       mount:
         path: /applis
-        src: /dev/sda2
+        src: /dev/sda3
         fstype: ext4
         state: present
         opts: defaults
