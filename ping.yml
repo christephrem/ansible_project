@@ -1,7 +1,6 @@
 --- 
 - name:
   hosts: all
-  become: yes
   tasks:
     - name: test du playbook
       shell: ping localhost -c 10 
