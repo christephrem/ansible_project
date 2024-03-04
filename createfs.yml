@@ -3,7 +3,7 @@
   hosts: all
   become: yes
   tasks:
-  
+
     - name: creation de partition
       parted: 
         device: /dev/sdb
@@ -15,15 +15,3 @@
       lvg:
         vg: vg_apps
         pvs: /dev/sdb
-
-    - name: resize lv 
-      lvol:
-        vg: vg_apps
-        lv: lv_apps
-        size: 50%VG
-    
-    - name: create filesystem
-      filesystem:
-        fstype: ext4
-        dev: "/dev/vg_apps/lv_apps"
-        force: no
