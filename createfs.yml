@@ -25,4 +25,18 @@
         fstype: ext4
         dev: "/dev/vg_apps/lv_apps"
         force: no
+    - name: create directory
+      file:
+        path: "/applis"
+        state: directory
+        mode: '0755'
+    - name: montage du fs 
+      mount:
+        path: "/applis"
+        src: "/dev/vg_apps/lv_apps"
+        fstype: ext4 
+        opts: rw, nosuid,noexec
+        state: mounted
+        
+    
     
