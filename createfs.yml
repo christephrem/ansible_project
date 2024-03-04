@@ -20,5 +20,9 @@
         vg: vg_apps
         lv: lv_apps
         size: 100%VG
-        
+    - name: crate filesystem
+      filesystem:
+        fstype: ext4
+        dev: "/dev/vg_apps/lv_apps"
+        force: no
     
