@@ -37,6 +37,9 @@
         fstype: ext4 
         opts: rw, nosuid,noexec
         state: mounted
+    - name: lvm debbug
+      debug: 
+        msg: "{{ ansible_lvm }}"
         
     
     
