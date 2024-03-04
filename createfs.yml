@@ -32,10 +32,10 @@
         mode: '0755'
     - name: montage du fs 
       mount:
-        path: "/applis/"
-        src: "/dev/vg_apps-lv_apps"
-        fstype: ext4
-        opts: rw, nosuid,noexec
+        path: "/apps"
+        src: "/dev/mapper/vg_apps-lv_apps"
+        fstype: "ext4"
+        opts: rw,nosuid,noexec
         state: mounted
     - name: lvm debbug
       debug: 
