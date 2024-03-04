@@ -15,4 +15,10 @@
       lvg:
         vg: vg_apps
         pvs: /dev/sdb1
+    - name: resize volume
+      lvol: 
+        vg: vg_apps
+        lv: lv_apps
+        size: 100%VG
+        
     
