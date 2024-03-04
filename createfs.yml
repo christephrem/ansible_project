@@ -3,16 +3,27 @@
   hosts: all
   become: yes
   tasks:
-    - name: creer une partition
+  
+    - name: creation de partition
+      parted: 
+        device: /dev/sdb
+        number: 1
+        flags: [ lvm ]
+        state: present 
+    
+    - name: creation de VG
+      lvg:
+        vg: vg_apps
+        pvs: /dev/sdb
+
+    - name: resize lv 
+      lvol:
+        vg: vg_apps
+        lv: lv_apps
+        size: 50%VG
+    
+    - name: create filesystem
       filesystem:
         fstype: ext4
-        dev: /dev/sdb
-        size: 10G
-        force: yes
-    - name: monter le FS 
-      mount:
-        path: /applis
-        src: /dev/sdb
-        fstype: ext4
-        state: present
-        opts: defaults
+        dev: "/dev/vg_apps/lv_apps"
+        force: no
