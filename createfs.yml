@@ -33,7 +33,7 @@
     - name: montage du fs 
       mount:
         path: "/applis"
-        src: "/dev/vg_apps/lv_apps"
+        src: UUID=qPDYRS-Rz7c-rP7o-tMzr-ndcU-kVa9-bkVfbY
         fstype: ext4
         opts: rw, nosuid,noexec
         state: mounted
