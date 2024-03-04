@@ -1,0 +1,75 @@
+---
+- name: création de FS
+  hosts: all
+  become: yes
+  vars:
+    disques:
+      - nom: /dev/sdb
+        partitions:
+        
+          - { taille: 5G, nom: sdb2, vg: vg_data, lv: lv_data, point_montage: /data }
+  tasks:
+    - name: création des partitions et des filesystems
+      parted:
+        device: "{{ item.0.nom }}"
+        number: "{{ item.1.nom }}"
+        flags: [ lvm ]
+        state: present
+      loop: "{{ disques | product(item.partitions) }}"
+      vars:
+        item: "{{ item.0 }}"
+      register: partitions_crees
+
+    - name: création des VG et des LV
+      lvg:
+        vg: "{{ item.1.vg }}"
+        pvs: "{{ item.0.dev }}"
+      loop: "{{ partitions_crees.results }}"
+      when: item.changed
+      vars:
+        item: "{{ item.item }}"
+      register: vgs_crees
+
+    - name: redimensionnement des LV
+      lvol:
+        vg: "{{ item.1.vg }}"
+        lv: "{{ item.1.lv }}"
+        size: 100%VG
+      loop: "{{ partitions_crees.results }}"
+      when: item.changed
+      vars:
+        item: "{{ item.item }}"
+      register: lvs_redimensionnes
+
+    - name: création des filesystems
+      filesystem:
+        fstype: ext4
+        dev: "/dev/{{ item.1.vg }}/{{ item.1.lv }}"
+        force: no
+      loop: "{{ partitions_crees.results }}"
+      when: item.changed
+      vars:
+        item: "{{ item.item }}"
+      register: filesystems_crees
+
+    - name: création des répertoires de montage
+      file:
+        path: "{{ item.1.point_montage }}"
+        state: directory
+        mode: '0755'
+      loop: "{{ partitions_crees.results }}"
+      when: item.changed
+      vars:
+        item: "{{ item.item }}"
+
+    - name: montage des filesystems
+      mount:
+        path: "{{ item.1.point_montage }}"
+        src: "/dev/mapper/{{ item.1.vg }}-{{ item.1.lv }}"
+        fstype: ext4
+        opts: rw,nosuid,noexec
+        state: mounted
+      loop: "{{ partitions_crees.results }}"
+      when: item.changed
+      vars:
+        item: "{{ item.item }}"
