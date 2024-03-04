@@ -6,12 +6,13 @@
     - name: creer une partition
       filesystem:
         fstype: ext4
-        dev: /dev/mapper/ubuntu--vg-ubuntu--lv
+        dev: /dev/sdb
+        size: 10G
         force: yes
     - name: monter le FS 
       mount:
         path: /applis
-        src: /dev/mapper/ubuntu--vg-ubuntu--lv
+        src: /dev/sdb
         fstype: ext4
         state: present
         opts: defaults
