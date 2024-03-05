@@ -1,7 +1,14 @@
 ---
-applis:
+dev:
   ansible_hosts: root
   ansible_password: vagrant 
   hosts:
       192.168.56.12:
       192.168.56.13:
+
+qual:
+  ansible_hosts: root 
+  ansible_password: vagrant 
+  hosts:
+    192.168.56.14:
+    192.168.56.15: 
