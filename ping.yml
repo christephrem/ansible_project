@@ -1,6 +1,6 @@
 --- 
 - name:
-  hosts: all
+  hosts: qual
   become: yes
   become_method: sudo
   tasks:
